@@ -44,6 +44,11 @@ rm("wanted")
 ### Prepare ydat
 #we need to replace these numbers with useful factor names.
 activity <- as.character(read.table("activity_labels.txt")$V2)
-ydat <- ydat%>% mutate(Action.Performed = activity[Action.Performed])
+ydat <- ydat %>% mutate(Action.Performed = activity[Action.Performed])
+rm("activity")
 
-### Prepare subdat
+### Bind the columns into one, processed dataset.
+Processed <- bind_cols(subdat,ydat,xdat)
+
+### write cleaned dataset into wd
+write.table(Processed, "Clean Data.txt")
