@@ -29,11 +29,19 @@ featurenames <- read.table("features.txt") %>% select(V2) %>% mutate(V2 = as.cha
 names(xdat) <- featurenames$V2
 rm("featurenames")
 
-names(ydat) <- "Action Performed"
-names(subdat) <- "Participant"
+names(ydat) <- "Action.Performed"
+names(subdat) <- "Participant.ID"
 
 ###Prepare xdat
 #find and remove unwanted variables
+#Assignment calls for only mean and Standard Deviation values.
+#I am taking this to mean only the variables that specifically end in "mean()" or "std()"
 wanted <- (grepl("mean\\(\\)", names(xdat))|grepl("std\\(\\)", names(xdat)))
 
 xdat <- xdat[which(wanted)]
+rm("wanted")
+
+### Prepare ydat
+#we need to replace these numbers with useful factor names.
+
+### Prepare subdat
