@@ -43,5 +43,7 @@ rm("wanted")
 
 ### Prepare ydat
 #we need to replace these numbers with useful factor names.
+activity <- as.character(read.table("activity_labels.txt")$V2)
+ydat <- ydat%>% mutate(Action.Performed = activity[Action.Performed])
 
 ### Prepare subdat
