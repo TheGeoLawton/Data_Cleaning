@@ -25,7 +25,15 @@ subdat <- bind_rows(subtrain,subtest)
 rm("xtest","xtrain","ytest","ytrain","subtest","subtrain")
 
 ###Add Descriptive Headers to Data.
-names(xdat) <- read.table("features.txt")[2]
+featurenames <- read.table("features.txt") %>% select(V2) %>% mutate(V2 = as.character(V2))
+names(xdat) <- featurenames$V2
+rm("featurenames")
 
 names(ydat) <- "Action Performed"
 names(subdat) <- "Participant"
+
+###Prepare xdat
+#find and remove unwanted variables
+wanted <- (grepl("mean\\(\\)", names(xdat))|grepl("std\\(\\)", names(xdat)))
+
+xdat <- xdat[which(wanted)]
