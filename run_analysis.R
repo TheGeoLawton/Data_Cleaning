@@ -52,3 +52,7 @@ Processed <- bind_cols(subdat,ydat,xdat)
 
 ### write cleaned dataset into wd
 write.table(Processed, "Clean Data.txt")
+
+### return means by Participant and action performed.
+Summarized <- Processed %>% group_by(Participant.ID,Action.Performed) %>% summarize_each(funs(mean))
+write.table(Summarized,"Output Summary.txt")
