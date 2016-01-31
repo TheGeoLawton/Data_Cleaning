@@ -55,4 +55,4 @@ write.table(Processed, "Clean Data.txt")
 
 ### return means by Participant and action performed.
 Summarized <- Processed %>% group_by(Participant.ID,Action.Performed) %>% summarize_each(funs(mean))
-write.table(Summarized,"Output Summary.txt")
+write.table(Summarized,"Output Summary.txt",rownames=FALSE)
